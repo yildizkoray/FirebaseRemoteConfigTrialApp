@@ -7,14 +7,23 @@
 //
 
 import UIKit
+import Firebase
 
 class ViewController: UIViewController {
 
+  @IBOutlet weak var remoteLabel: UILabel!
+
+  private let remoteConfigService: RCService = .shared
+
   override func viewDidLoad() {
     super.viewDidLoad()
-    // Do any additional setup after loading the view.
+
+    remoteConfigService.loadingDoneCallback = showRemoteValue
   }
 
-
+  func showRemoteValue(){
+    remoteLabel.text = remoteConfigService.string(forKey: "labelText")
+  }
 }
+
 
